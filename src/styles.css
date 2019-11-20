@@ -6,3 +6,7 @@
 .item {
     width: 30px;
 }
+
+.everything {
+    display: none;
+}

@@ -7,16 +7,19 @@ import img from'./img/1.png';
 
 $(document).ready(function() {
     let word, giphyService;
+    let counter = 0;
+    $('.everything').toggle();
     $('#inputLetter').submit(function(event){
         event.preventDefault();
         const letter = $("#userInput").val();
+        
         
         const output = word.checkLetter(letter);
         if (output) {
             displayLetters();
         } else {
+            counter++;
             displayImage();
-            
         }
     });
     
@@ -53,5 +56,13 @@ $(document).ready(function() {
         let index = Math.ceil(Math.random() * 25);
         console.log(giphyService.images);
         $('#putGiphy').attr('src', giphyService.images[index].images.downsized_large.url);
+
+        if(counter == 6){
+            $('.everything').toggle();
+            $('#loser').text('YOU LOSE!');
+            $('#hangman').attr('src', 'img/6.png');
+        } else {
+            $('#hangman').attr('src', `img/${counter}.png`);
+        }
     }
 });

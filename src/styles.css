@@ -1,0 +1,8 @@
+#boxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 30px;
+}

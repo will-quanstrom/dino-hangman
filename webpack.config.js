@@ -2,6 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/main.js',
@@ -17,10 +19,14 @@ module.exports = {
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'CHANGENAME',
+      title: 'DINO-HANGMAN',
       template: './src/index.html',
       inject: 'body'
-    })
+    }),
+    new Dotenv(),
+    new CopyWebpackPlugin([
+      {from: 'src/img', to: 'img'}
+    ])
   ],
   module: {
     rules: [
@@ -35,7 +41,18 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "eslint-loader"
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          },
+        ],
+      },
     ]
   }
 };

@@ -1,3 +1,4 @@
+import { winning } from './main';
 export class DinoService {
     async getRandomWord() {
         try {
@@ -17,7 +18,8 @@ export class GiphyService {
 
     async getRandomGif() {
         try {
-            let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=2ZSgRjeqQtUpxy8XUEJ4lQkQ0kiYEdwN&q=death&limit=25`);
+            //console.log(process.env.API_KEY) 2ZSgRjeqQtUpxy8XUEJ4lQkQ0kiYEdwN
+            let response = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=${process.env.exports.API_KEY}&q=death&limit=25`);
             let jsonifiedResponse = await response.json();
             return jsonifiedResponse;
         } catch(error) {
@@ -48,6 +50,11 @@ export class Word {
 
     checkLetter (letter) {
         let flag = false;
+        console.log(letter.length >= 2, letter, this.response.join(""));
+        if(letter.length >= 2 && letter == this.response.join("")) {
+            console.log('isInside?');
+            winning();
+        }
         for(let i = 0; i < this.response.length; i++){
             if(this.response[i] == (letter) ){
                 this.currentState[i] = letter;
@@ -56,6 +63,8 @@ export class Word {
         } 
         return flag;
     }
+
+
 
 
 

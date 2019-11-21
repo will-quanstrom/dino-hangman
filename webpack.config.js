@@ -23,7 +23,9 @@ module.exports = {
       template: './src/index.html',
       inject: 'body'
     }),
-    new Dotenv(),
+    new Dotenv({
+      path: './.env'
+    }),
     new CopyWebpackPlugin([
       {from: 'src/img', to: 'img'}
     ])

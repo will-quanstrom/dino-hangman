@@ -3,7 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 import $ from 'jquery';
 import { DinoService, Word, GiphyService } from './dino-hangman';
-import img from'./img/1.png';
+
+export function winning() {
+    console.log('inside?');
+    $('.everything').hide();
+    $('#putGiphy').attr('src', 'https://media.tenor.com/images/46c9c1ac2d73668880d4ead82d35cf57/tenor.gif');
+    $('#loser').text('YOU WIN!');
+}
 
 $(document).ready(function() {
     let word, giphyService;
